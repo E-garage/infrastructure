@@ -1,0 +1,48 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: backend-config
+  labels:
+    name: backend-config-web
+data:
+  .env: |-
+    APP_NAME=Egarage
+    APP_ENV=production
+    APP_KEY=base64:PamZlLHzYccVoHNgJpsA0u0ExEgAMiW15cULszYD6Dc=
+    APP_DEBUG=true
+    APP_URL=http://localhost
+
+    LOG_CHANNEL=stderr
+    LOG_LEVEL=debug
+
+    DB_CONNECTION=pgsql
+    DB_HOST=db
+    DB_PORT=5432
+    DB_DATABASE=egarage
+    DB_USERNAME=laravel
+    DB_PASSWORD=password
+
+    BROADCAST_DRIVER=log
+    CACHE_DRIVER=file
+    FILESYSTEM_DRIVER=local
+    QUEUE_CONNECTION=sync
+    SESSION_DRIVER=file
+    SESSION_LIFETIME=120
+
+    MEMCACHED_HOST=127.0.0.1
+
+    REDIS_HOST=127.0.0.1
+    REDIS_PASSWORD=null
+    REDIS_PORT=6379
+
+    MAIL_MAILER=smtp
+    MAIL_HOST=smtp.mailtrap.io
+    MAIL_PORT=2525
+    MAIL_USERNAME=a83d39fc2a07f2
+    MAIL_PASSWORD=7b66d086a79929
+    MAIL_ENCRYPTION=tls
+    MAIL_FROM_ADDRESS=2095e66e4d-856131@inbox.mailtrap.io
+    MAIL_FROM_NAME="${APP_NAME}"
+
+    L5_SWAGGER_GENERATE_ALWAYS=false
+    L5_SWAGGER_CONST_HOST=localhost:9000
