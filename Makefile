@@ -9,3 +9,8 @@ create-account-gcp-dns:
         dns01-solver@$PROJECT_ID.iam.gserviceaccount.com
 link-account-cert-menager:
 	kubectl annotate serviceaccount --namespace=cert-manager cert-manager "iam.gke.io/gcp-service-account=dns01-solver@$PROJECT_ID.iam.gserviceaccount.com"
+install:
+	make add-secret-docker-registry
+	make install-cert-menager
+	make create-account-gcp-dns
+	make link-account-cert-menager
