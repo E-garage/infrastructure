@@ -12,16 +12,20 @@ spec:
   tls:
     - hosts:
         - egarage.store
+        - backend.egarage.store
       secretName: cert-secret
   rules:
     - host: egarage.store
       http:
         paths:
-          - path: /api(/|$)(.*)
+          - path: /()(.*)
             pathType: Prefix
             backend:
-              serviceName: backend-app
+              serviceName: frontend-app
               servicePort: 80
+    - host: backend.egarage.store
+      http:
+        paths:
           - path: /()(.*)
             pathType: Prefix
             backend:

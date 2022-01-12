@@ -9,3 +9,4 @@ spec:
     kind: ClusterIssuer
   dnsNames:
     - egarage.store
+    - backend.egarage.store

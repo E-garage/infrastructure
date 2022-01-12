@@ -42,6 +42,18 @@ spec:
           name: nginx
           ports:
             - containerPort: 80
+          livenessProbe:
+            httpGet:
+              path: /
+              port: 80
+            InitialDelaySeconds: 5
+            periodSeconds: 3
+          readinessProbe:
+            httpGet:
+              path: /
+              port: 80
+            InitialDelaySeconds: 5
+            periodSeconds: 3
           volumeMounts:
             - name: code
               mountPath: /code

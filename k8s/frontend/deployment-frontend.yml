@@ -1,0 +1,59 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: frontend-app
+  labels:
+    tier: frontend
+spec:
+  selector:
+    app: frontend-app
+    tier: frontend
+  type: NodePort
+  ports:
+    - name: "http"
+      port: 80
+      targetPort: 80
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: frontend-app
+spec:
+  revisionHistoryLimit: 0
+  replicas: 1
+  strategy:
+    type: RollingUpdate
+  selector:
+    matchLabels:
+      app: frontend-app
+      tier: frontend
+  template:
+    metadata:
+      labels:
+        app: frontend-app
+        tier: frontend
+    spec:
+      enableServiceLinks: false
+      securityContext:
+        fsGroup: 1000
+      terminationGracePeriodSeconds: 30
+      containers:
+        - image: mrhdolek/e-garage-frontend:latest
+          imagePullPolicy: "Always"
+          imagePullSecrets:
+            - name: regcred
+          name: react
+          ports:
+            - containerPort: 80
+          livenessProbe:
+            httpGet:
+              path: /
+              port: 80
+            InitialDelaySeconds: 5
+            periodSeconds: 3
+          readinessProbe:
+            httpGet:
+              path: /
+              port: 80
+            InitialDelaySeconds: 5
+            periodSeconds: 3
