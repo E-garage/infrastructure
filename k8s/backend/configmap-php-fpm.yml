@@ -1,0 +1,17 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: backend-php-fpm
+  labels:
+    name: backend-config
+data:
+  zzmyphp.ini: |
+    ; timezone
+    date.timezone = Europe/Berlin
+    ; error reporing
+    log_errors = On
+    error_log = /dev/stderr
+    display_errors = Off
+  zzmyphp-fpm.conf: |
+    [www]
+    pm.status_path = /phpfpm_status
